@@ -1,6 +1,6 @@
 # agent-backend
 
-> AI agent backend
+> AI agent backend using NeDB
 
 ## About
 
