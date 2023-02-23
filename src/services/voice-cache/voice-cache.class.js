@@ -1,6 +1,7 @@
 const { Service } = require('feathers-nedb');
 
 const crypto = require('crypto')
+const {errors} = require('@feathersjs/errors');
 
 exports.VoiceCache = class VoiceCache extends Service {
   async create(data, params) {
@@ -14,13 +15,17 @@ exports.VoiceCache = class VoiceCache extends Service {
     const hash = this.generateHash(prompt, recipient);
 
     // Check if the cache already contains the response for the prompt and recipient
-    const cachedResponse = await this.get(hash);
-    if (cachedResponse) {
-      return cachedResponse;
+    try {
+      const cachedResponse = await this.get(hash);
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+    } catch (error) {
+      console.log('hash does not exist');
     }
 
     // Create a new cache entry for the response
-    const doc = { _id: hash, prompt, recipient, response };
+    const doc = { _id: hash, response };
     return super.create(doc, params);
   }
 

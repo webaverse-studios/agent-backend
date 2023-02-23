@@ -14,6 +14,9 @@ module.exports = function (app) {
 
   // Get our initialized service so that we can register hooks
   const service = app.service('voice-cache');
+  app.service('voice-cache').on('created', (cache) => {
+    console.log('A new prompt has been created', cache);
+  });
 
   service.hooks(hooks);
 };
