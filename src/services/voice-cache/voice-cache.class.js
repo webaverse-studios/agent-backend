@@ -1,6 +1,6 @@
 const { Service } = require('feathers-nedb');
 
-const crypto = require('crypto')
+const crypto = require('crypto');
 const {errors} = require('@feathersjs/errors');
 
 exports.VoiceCache = class VoiceCache extends Service {
