@@ -1,6 +1,8 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/client.html
 import { feathers } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
+import { textCacheClient } from './services/text-cache/text-cache.shared.js'
+
 import { voiceMetadataClient } from './services/voice-metadata/voice-metadata.shared.js'
 
 import { voiceBlobClient } from './services/voice-blob/voice-blob.shared.js'
@@ -27,6 +29,8 @@ export const createClient = (connection, authenticationOptions = {}) => {
   client.configure(voiceBlobClient)
 
   client.configure(voiceMetadataClient)
+
+  client.configure(textCacheClient)
 
   return client
 }
