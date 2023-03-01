@@ -1,7 +1,15 @@
-const users = require('./users/users.service.js');
-const voicecache = require('./voice-cache/voice-cache.service.js');
-// eslint-disable-next-line no-unused-vars
-module.exports = function (app) {
-  app.configure(users);
-  app.configure(voicecache);
-};
+import { voiceMetadata } from './voice-metadata/voice-metadata.js'
+
+import { voiceBlob } from './voice-blob/voice-blob.js'
+
+import { voiceCache } from './voice-cache/voice-cache.js'
+
+export const services = (app) => {
+  app.configure(voiceMetadata)
+
+  app.configure(voiceBlob)
+
+  app.configure(voiceCache)
+
+  // All services will be registered here
+}

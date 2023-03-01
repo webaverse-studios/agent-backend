@@ -1,65 +1,76 @@
 {
-  "name": "agent-backend",
-  "description": "AI agent backend",
+  "name": "AI-backend",
+  "description": "",
   "version": "0.0.0",
   "homepage": "",
   "private": true,
-  "main": "src",
   "keywords": [
     "feathers"
   ],
-  "author": {
-    "name": "olaf",
-    "email": "jkraasch@uos.de"
-  },
+  "author": {},
   "contributors": [],
   "bugs": {},
+  "engines": {
+    "node": ">= 18.12.1"
+  },
+  "feathers": {
+    "language": "js",
+    "packager": "npm",
+    "database": "other",
+    "framework": "koa",
+    "transports": [
+      "rest",
+      "websockets"
+    ],
+    "schema": "json"
+  },
   "directories": {
     "lib": "src",
-    "test": "test/",
-    "config": "config/"
+    "test": "test"
   },
-  "engines": {
-    "node": "^18.0.0",
-    "npm": ">= 3.0.0"
-  },
+  "files": [
+    "lib/client.js",
+    "lib/**/*.d.ts",
+    "lib/**/*.shared.js"
+  ],
+  "main": "src/client",
+  "type": "module",
   "scripts": {
-    "test": "npm run lint && npm run mocha",
-    "lint": "eslint src/. test/. --config .eslintrc.json --fix",
+    "start": "node src",
     "dev": "nodemon src/",
-    "start": "node src/",
-    "mocha": "mocha test/ --recursive --exit"
-  },
-  "standard": {
-    "env": [
-      "mocha"
-    ],
-    "ignore": []
+    "prettier": "npx prettier \"**/*.js\" --write",
+    "mocha": "cross-env NODE_ENV=test mocha test/ --recursive --exit",
+    "test": "npm run mocha",
+    "bundle:client": "npm pack --pack-destination ./public"
   },
   "dependencies": {
-    "@feathersjs/authentication": "^4.5.15",
-    "@feathersjs/authentication-local": "^4.5.15",
-    "@feathersjs/authentication-oauth": "^4.5.15",
-    "@feathersjs/client": "^4.5.15",
-    "@feathersjs/configuration": "^4.5.15",
-    "@feathersjs/errors": "^4.5.15",
-    "@feathersjs/express": "^4.5.15",
-    "@feathersjs/feathers": "^4.5.15",
-    "@feathersjs/socketio": "^4.5.15",
-    "@feathersjs/socketio-client": "^4.5.15",
-    "@feathersjs/transport-commons": "^4.5.15",
-    "@seald-io/nedb": "^3.1.0",
-    "compression": "^1.7.4",
-    "cors": "^2.8.5",
+    "@feathersjs/adapter-commons": "^5.0.0",
+    "@feathersjs/authentication": "^5.0.0",
+    "@feathersjs/authentication-client": "^5.0.0",
+    "@feathersjs/configuration": "^5.0.0",
+    "@feathersjs/errors": "^5.0.0",
+    "@feathersjs/feathers": "^5.0.0",
+    "@feathersjs/koa": "^5.0.0",
+    "@feathersjs/schema": "^5.0.0",
+    "@feathersjs/socketio": "^5.0.0",
+    "@feathersjs/transport-commons": "^5.0.0",
+    "@seald-io/nedb": "^4.0.1",
+    "dauria": "^2.0.0",
+    "feathers-blob": "^2.6.0",
     "feathers-nedb": "^6.0.0",
-    "helmet": "^5.1.1",
-    "serve-favicon": "^2.5.0",
+    "fs-blob-store": "^6.0.0",
+    "mime-types": "^2.1.35",
+    "nedb": "^1.8.0",
+    "uuid": "^9.0.0",
     "winston": "^3.8.2"
   },
   "devDependencies": {
-    "axios": "^1.3.3",
-    "eslint": "^8.34.0",
+    "@feathersjs/cli": "^5.0.0",
+    "@feathersjs/rest-client": "^5.0.0",
+    "axios": "^1.3.4",
+    "cross-env": "^7.0.3",
     "mocha": "^10.2.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.4"
   }
 }
