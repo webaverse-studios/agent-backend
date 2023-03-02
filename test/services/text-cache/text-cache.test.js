@@ -16,9 +16,9 @@ const main = async () => {
   const service = app.service('text-cache')
   // test the service create, get and remove text
   const text = "This is a test"
-  const agentID = "test-agent"
+  const agentIDs = ["test-agent", "test-agent2"]
   const prompt = "test-prompt"
-  const data = {agentID, prompt, text}
+  const data = {agentIDs, prompt, text}
   const create_results = await service.create(data)
   console.log("CREATE RESULTS:", create_results)
   const get_results = await  service.get(create_results._id)

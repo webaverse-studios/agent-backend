@@ -10,11 +10,14 @@ export class TextCacheService extends Service {
   }
 
   async create(data, params) {
-    const { agentID, prompt, text } = data;
+    const { agentIDs, prompt, text } = data;
     // assert data is ok
-    if (!agentID || !prompt || !text) {
+    if (!agentIDs || !prompt || !text) {
       throw new Error("Invalid data");
     }
+
+    // agentIDs is an array of agentIDs (e.g. ["agent1", "agent2"]) join them to a string, but if agentIDs is already a single string, just use that
+    const agentID = Array.isArray(agentIDs) ? agentIDs.join("") : agentIDs;
 
     const hash = this.generateHash(agentID, prompt);
     // Get the existing data for the IDs
