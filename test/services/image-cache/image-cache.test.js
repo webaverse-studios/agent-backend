@@ -1,6 +1,13 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.test.html
-import assert from 'assert'
-import { app } from '../../../src/app.js'
+import assert from "assert";
+import { app } from "../../../src/app.js";
+import fs from "fs";
+
+function createBlobFromImageFile(filename){
+  // read image from local file (filename) and create blob
+  const imageBuffer = fs.readFileSync(filename)
+  return new Blob([imageBuffer], { type: 'image/jpeg' })
+}
 
 describe('image-cache service', () => {
   it('registered the service', () => {
@@ -11,8 +18,9 @@ describe('image-cache service', () => {
 })
 const main = async () => {
   const service = app.service('image-cache')
-  // create test image blob with a random RGBA image of size 512x512
-  const imageBlob = new Blob([new Array(512 * 512 * 4).fill(0).map(() => Math.random() * 255)], {type: 'image/png'})
+  // create test image blob by opening test.jpg from local storage
+  const imageBlob = createBlobFromImageFile("/home/olaf/WebstormProjects/agent-backend/test/services/image-cache/test.jpg")
+  console.log(imageBlob)
   console.log("waiting")
   const result = await service.create({agentID: "123", imageBlob: imageBlob})
   console.log(result)
