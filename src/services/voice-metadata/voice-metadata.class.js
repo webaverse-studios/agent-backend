@@ -11,12 +11,17 @@ export class VoiceMetadataService extends Service {
 
   async create(data, params) {
     // receives {agentID, prompt, audioBlob} from the client -> create hash from agentID and prompt -> store in db
-    const { agentID, prompt, audioBlob } = data
-
-    // assert data is ok
-    if (!agentID || !prompt || !audioBlob) {
+    const { agentIDs, prompt, audioBlob } = data
+    if (!agentIDs || !prompt || !audioBlob) {
       throw new Error("Invalid data")
     }
+
+    // agentIDs is an array of agentIDs (e.g. ["agent1", "agent2"]) join them to a string, but if agentIDs is already a single string, just use that
+    const agentID = Array.isArray(agentIDs) ? agentIDs.join("") : agentIDs
+
+    console.log("AGENTID IS: ", agentID)
+    // assert data is ok
+
     console.log("DATA IS: ", data)
     const hash = this.generateHash(agentID, prompt)
 

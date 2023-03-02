@@ -16,7 +16,7 @@ const main = async () => {
   // create test audio blob with white noise for 10 seconds as audio data
   const audioBlob = new Blob([new Array(10 * 44100).fill(0).map(() => Math.random() * 2 - 1)], {type: 'audio/wav'})
   console.log("waiting")
-  const result = await service.create({agentID: "123", prompt: "test10sec", audioBlob: audioBlob})
+  const result = await service.create({agentIDs: ["123", "345"], prompt: "test10sec", audioBlob: audioBlob})
   console.log(result)
   const getted = await service.get(result._id)
   console.log(getted)
