@@ -57,6 +57,7 @@
     "@seald-io/nedb": "^4.0.1",
     "dauria": "^2.0.0",
     "feathers-blob": "^2.6.0",
+    "feathers-hooks-common": "^7.0.0",
     "feathers-nedb": "^6.0.0",
     "fs-blob-store": "^6.0.0",
     "mime-types": "^2.1.35",

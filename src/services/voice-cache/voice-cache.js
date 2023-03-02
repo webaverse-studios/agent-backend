@@ -1,6 +1,9 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
 
+import pkg from 'dauria';
+const { getBase64DataURI } = pkg;
+
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
   voiceCacheDataValidator,
@@ -44,6 +47,14 @@ export const voiceCache = (app) => {
       find: [],
       get: [],
       create: [
+        async function(context) {
+          if (!context.data.uri && context.data.audioBlob) {
+            const file = context.data.audioBlob;
+            const audioArray = await file.arrayBuffer();
+            const audioBuffer = Buffer.from(audioArray);
+            context.data.uri = getBase64DataURI(audioBuffer, file.type);
+          }
+        }
         // schemaHooks.validateData(voiceCacheDataValidator),
         // schemaHooks.resolveData(voiceCacheDataResolver)
       ],

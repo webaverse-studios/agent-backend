@@ -1,6 +1,8 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
 
+import {disallow} from 'feathers-hooks-common';
+
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
   voiceBlobDataValidator,
@@ -23,7 +25,10 @@ export * from './voice-blob.schema.js'
 export const voiceBlob = (app) => {
   const blobStorage = createModel(app);
   // Register our service on the Feathers application
-  app.use(voiceBlobPath, new VoiceBlobService({Model: blobStorage}), {
+  app.use(voiceBlobPath,
+
+    // Service class
+    new VoiceBlobService({Model: blobStorage}), {
     // A list of all methods this service exposes externally
     methods: voiceBlobMethods,
     // You can add additional custom events to be sent to clients here
@@ -40,6 +45,7 @@ export const voiceBlob = (app) => {
     },
     before: {
       all: [
+        disallow('external'),
         // schemaHooks.validateQuery(voiceBlobQueryValidator),
         // schemaHooks.resolveQuery(voiceBlobQueryResolver)
       ],
