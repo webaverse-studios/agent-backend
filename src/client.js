@@ -1,6 +1,12 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/client.html
 import { feathers } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
+import { imageMetadataClient } from './services/image-metadata/image-metadata.shared.js'
+
+import { imageBlobClient } from './services/image-blob/image-blob.shared.js'
+
+import { imageCacheClient } from './services/image-cache/image-cache.shared.js'
+
 import { textCacheClient } from './services/text-cache/text-cache.shared.js'
 
 import { voiceMetadataClient } from './services/voice-metadata/voice-metadata.shared.js'
@@ -31,6 +37,12 @@ export const createClient = (connection, authenticationOptions = {}) => {
   client.configure(voiceMetadataClient)
 
   client.configure(textCacheClient)
+
+  client.configure(imageCacheClient)
+
+  client.configure(imageBlobClient)
+
+  client.configure(imageMetadataClient)
 
   return client
 }
