@@ -1,4 +1,5 @@
 import { app } from './app.js'
+import { gun } from './gun_src/gun_app.js'
 import { logger } from './logger.js'
 
 const port = app.get('port')

@@ -60,6 +60,7 @@
     "feathers-hooks-common": "^7.0.0",
     "feathers-nedb": "^6.0.0",
     "fs-blob-store": "^6.0.0",
+    "gun": "^0.2020.1239",
     "mime-types": "^2.1.35",
     "nedb": "^1.8.0",
     "uuid": "^9.0.0",
