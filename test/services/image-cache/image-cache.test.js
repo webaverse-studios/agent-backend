@@ -19,7 +19,7 @@ describe('image-cache service', () => {
 const main = async () => {
   const service = app.service('image-cache')
   // create test image blob by opening test.jpg from local storage
-  const imageBlob = createBlobFromImageFile("/home/olaf/WebstormProjects/agent-backend/test/services/image-cache/test.jpg")
+  const imageBlob = createBlobFromImageFile("test/services/image-cache/test.jpg")
   console.log(imageBlob)
   console.log("waiting")
   const result = await service.create({agentID: "123", imageBlob: imageBlob})
