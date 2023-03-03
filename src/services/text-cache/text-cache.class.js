@@ -10,6 +10,7 @@ export class TextCacheService extends Service {
   }
 
   async create(data, params) {
+    console.log("DATA IS: ", data)
     const { agentIDs, prompt, text } = data;
     // assert data is ok
     if (!agentIDs || !prompt || !text) {
