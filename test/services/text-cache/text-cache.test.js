@@ -18,7 +18,8 @@ const main = async () => {
   const text = "This is a test"
   const agentIDs = ["test-agent", "test-agent2"]
   const prompt = "test-prompt"
-  const data = {agentIDs, prompt, text}
+  const timestamp = Date.now()
+  const data = {agentIDs, prompt, text, timestamp}
   const create_results = await service.create(data)
   console.log("CREATE RESULTS:", create_results)
   const get_results = await  service.get(create_results._id)

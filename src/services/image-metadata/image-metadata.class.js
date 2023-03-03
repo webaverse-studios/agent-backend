@@ -10,10 +10,10 @@ export class ImageMetadataService  extends Service {
   }
   async create(data, params) {
     // receives {agentID, prompt, audioBlob} from the client -> create hash from agentID and prompt -> store in db
-    const { agentID, imageBlob } = data
+    const { agentID, timestamp, imageBlob } = data
 
     // assert data is ok
-    if (!agentID || !imageBlob) {
+    if (!agentID || !timestamp || !imageBlob) {
       throw new Error("Invalid data")
     }
     console.log("DATA IS: ", data)
@@ -35,9 +35,9 @@ export class ImageMetadataService  extends Service {
     }
   }
 
-  generateHash(agentID) {
+  generateHash(agentID, timestamp) {
     const hash = crypto.createHash('md5');
-    hash.update(agentID);
+    hash.update(agentID + timestamp);
     return hash.digest('hex');
   }
 

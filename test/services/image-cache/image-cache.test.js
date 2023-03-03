@@ -20,9 +20,10 @@ const main = async () => {
   const service = app.service('image-cache')
   // create test image blob by opening test.jpg from local storage
   const imageBlob = createBlobFromImageFile("test/test.jpg")
+  const timestamp = Date.now()
   console.log(imageBlob)
   console.log("waiting")
-  const result = await service.create({agentID: "123", imageBlob: imageBlob})
+  const result = await service.create({agentID: "123", imageBlob: imageBlob, timestamp: timestamp})
   console.log(result)
   const getted = await service.get(result._id)
   console.log(getted)

@@ -11,8 +11,8 @@ export class VoiceMetadataService extends Service {
 
   async create(data, params) {
     // receives {agentID, prompt, audioBlob} from the client -> create hash from agentID and prompt -> store in db
-    const { agentIDs, prompt, audioBlob } = data
-    if (!agentIDs || !prompt || !audioBlob) {
+    const { agentIDs, timestamp, prompt, audioBlob } = data
+    if (!agentIDs || !timestamp || !prompt || !audioBlob) {
       throw new Error("Invalid data")
     }
 
@@ -23,7 +23,7 @@ export class VoiceMetadataService extends Service {
     // assert data is ok
 
     console.log("DATA IS: ", data)
-    const hash = this.generateHash(agentID, prompt)
+    const hash = this.generateHash(agentID, prompt, timestamp)
 
     // Get the existing data for the IDs
     try {
@@ -41,9 +41,9 @@ export class VoiceMetadataService extends Service {
     }
   }
 
-  generateHash(agentID, prompt) {
+  generateHash(agentID, prompt, timestamp) {
     const hash = crypto.createHash('md5');
-    hash.update(agentID + prompt);
+    hash.update(agentID + prompt + timestamp);
     return hash.digest('hex');
   }
 }

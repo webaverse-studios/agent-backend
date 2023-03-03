@@ -13,23 +13,25 @@ function createBlobFromImageFile(filename){
 
 const main = async () => {
   const bob = addAgentToGunDB("bob")
+
+  // timestamp for the cache
+  const timestamp = Date.now()
+
   // cache a test text in the feathers database
   const text = "This is a test"
   const agentIDs = "bob"
   const prompt = "test-prompt"
-  const data = {agentIDs, prompt, text}
+  const data = {agentIDs, prompt, text, timestamp:timestamp}
 
   // cache a test image in the feathers database after loading test.jpg and turning it into a blob
-  const imageBlob = createBlobFromImageFile("test/test.jpg")
-  const image_data = {agentID: "bob", imageBlob: imageBlob}
+  const imageBlob = createBlobFromImageFile("./test.jpg")
+  const image_data = {agentID: "bob", imageBlob: imageBlob, timestamp:timestamp}
 
   // open wav file and turn into blob
-  const wavFile = fs.readFileSync("test/test.wav")
+  const wavFile = fs.readFileSync("./test.wav")
   const wavBlob = new Blob([wavFile], {type: 'audio/wav'})
-  const voice_data = {agentIDs: "bob", prompt:"test-prompt", audioBlob: wavBlob}
+  const voice_data = {agentIDs: "bob", prompt:"test-prompt", audioBlob: wavBlob, timestamp:timestamp}
   // add a test memory to the gun database
-  const timestamp = Date.now()
-  // await addMemoryToGunDB("bob", timestamp, {text: data, image: image_data})
   await addMemory("bob", timestamp, {text: data, image: image_data, voice: voice_data})
   const memory = await remember("bob", timestamp)
   console.log("MEMORY:", memory)

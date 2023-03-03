@@ -11,9 +11,9 @@ export class TextCacheService extends Service {
 
   async create(data, params) {
     console.log("DATA IS: ", data)
-    const { agentIDs, prompt, text } = data;
+    const { agentIDs, timestamp ,prompt, text } = data;
     // assert data is ok
-    if (!agentIDs || !prompt || !text) {
+    if (!agentIDs || !timestamp || !prompt || !text) {
       throw new Error("Invalid data");
     }
 
@@ -31,9 +31,9 @@ export class TextCacheService extends Service {
     }
   }
 
-  generateHash(agentID, prompt) {
+  generateHash(agentID, prompt, timestamp) {
     const hash = crypto.createHash('md5');
-    hash.update(agentID + prompt);
+    hash.update(agentID + prompt + timestamp);
     return hash.digest('hex');
   }
 
